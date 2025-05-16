@@ -8,8 +8,12 @@ const navBarLinks = [
 ];
 ---
 
-<header>
-  <nav class="border-gray-200" role="navigation" aria-label="Main navigation">
+<header class="stiky top-0 z-50">
+  <nav
+    class="border-gray-200 bg-[#1B1B1B]"
+    role="navigation"
+    aria-label="Main navigation"
+  >
     <div
       class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
     >
@@ -43,9 +47,19 @@ const navBarLinks = [
             d="M1 1h15M1 7h15M1 13h15"></path>
         </svg>
       </button>
-      <div class="w-full md:block md:w-auto" id="navbar-default">
+      <div
+        class="hidden fixed inset-0 z-50 bg-[#1B1B1B] transform translate-x-full transition-transform duration-300 ease-in-out md:static md:translate-x-0 md:flex md:flex-row md:items-center md:justify-end md:w-auto md:h-auto md:bg-transparent md:dark:bg-transparent"
+        id="navbar-default"
+      >
+        <button
+          id="close-menu"
+          class="button_close_menu absolute top-6 right-6 text-white md:hidden"
+          aria-label="Cerrar menú"
+        >
+          ✕
+        </button>
         <ul
-          class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:border-gray-700"
+          class="font-medium flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0"
         >
           {
             navBarLinks.map((link) => (
@@ -66,19 +80,46 @@ const navBarLinks = [
   </nav>
 </header>
 
+<style>
+  .button_close_menu {
+    font-size: 30px;
+  }
+</style>
+
 <script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
     const toggleBtn = document.querySelector(
       '[data-collapse-toggle="navbar-default"]'
     );
     const navMenu = document.getElementById("navbar-default");
+    const closeBtn = document.getElementById("close-menu");
+    const navLinks = document.querySelectorAll("nav a");
 
     toggleBtn?.addEventListener("click", () => {
-      navMenu?.classList.toggle("hidden");
+      navMenu?.classList.remove("hidden");
+      setTimeout(() => {
+        navMenu?.classList.remove("translate-x-full");
+      }, 10);
+    });
+
+    const closeMenu = () => {
+      navMenu?.classList.add("translate-x-full");
+      setTimeout(() => {
+        navMenu?.classList.add("hidden");
+      }, 300);
+    };
+
+    closeBtn?.addEventListener("click", closeMenu);
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth < 768) {
+          closeMenu();
+        }
+      });
     });
 
     const sections = document.querySelectorAll("section[id]");
-    const navLinks = document.querySelectorAll("nav a");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -88,21 +129,10 @@ const navBarLinks = [
 
           if (entry.isIntersecting) {
             navLinks.forEach((a) => {
-              a.classList.remove(
-                "bg-blue-700",
-                "text-white",
-                "scale-105",
-                "shadow-md"
-              );
+              a.classList.remove("bg-blue-700", "text-white");
               a.classList.add("text-gray-900", "dark:text-white");
             });
-
-            link?.classList.add(
-              "bg-blue-700",
-              "text-white",
-              "scale-105",
-              "shadow-md"
-            );
+            link?.classList.add("bg-blue-700", "text-white");
             link?.classList.remove("text-gray-900", "dark:text-white");
           }
         });
@@ -114,13 +144,5 @@ const navBarLinks = [
     );
 
     sections.forEach((section) => observer.observe(section));
-
-    navLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        if (window.innerWidth < 768) {
-          navMenu?.classList.add("hidden");
-        }
-      });
-    });
   });
 </script>

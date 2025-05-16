@@ -1,0 +1,32 @@
+---
+import Card from "../components/Card.astro";
+
+const stack = {
+  languajes: ["TypeScript", "JavaScript", "Python", "Rust"],
+  FrontEnd: [
+    "NextJs",
+    "React",
+    "React Native",
+    "Angular 15+",
+    "TailwindCss",
+    "Material UI",
+  ],
+  Backend: ["Nodejs", "Express", "Nest", "fastAPI", "django"],
+  database: ["PostgresSQL", "MongoDB", "Firebase", "Prisma ORM"],
+  cloud: ["AWS", "Docker", "Kubernetes", "Github Actions", "Jenkins"],
+  ai: ["langchain", "openAI API", "TensorFlow"],
+};
+---
+
+<section id="skills" class="max-w-screen-xl mx-auto p-6">
+  <h2 class="text-4xl mb-5 font-bold">My Skills</h2>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <Card skills={stack.languajes} title="Programming Languages" />
+    <Card skills={stack.FrontEnd} title="Frontend Development" />
+    <Card skills={stack.Backend} title="Backend Development" />
+    <Card skills={stack.database} title="Database & Storage" />
+    <Card skills={stack.cloud} title="Cloud & DevOps" />
+    <Card skills={stack.ai} title="IA / ML" />
+  </div>
+</section>
