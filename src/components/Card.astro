@@ -3,19 +3,16 @@ const { skills, title } = Astro.props;
 ---
 
 <div
-  class="rounded-lg border border-border/50 bg-background/80 backdrop-blur-md backdrop-filter shadow-sm dark:bg-card/30 dark:backdrop-blur-md hover:shadow-md transition-all duration-300 ease-in-out p-4"
+  class="rounded-xl border border-border/40 bg-background/80 backdrop-blur-sm shadow transition-shadow hover:shadow-lg p-6 flex flex-col gap-4 dark:bg-card/30"
 >
-  <h3 class="text-center mb-3">{title}</h3>
+  <h3 class="text-center text-xl font-semibold text-primary mb-2">{title}</h3>
 
-  <div class="flex flex-col justify-center min-h-[160px]">
+  <div class="flex flex-wrap justify-center gap-2">
     {
       skills.map((skill: string) => (
-        <div
-          class="px-3 py-1 bg-muted/80 backdrop-blur-sm rounded-md text-sm border border-purple-500/10 shadow-sm"
-          style="opacity: 1; transform: none;"
-        >
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-tr from-purple-500 to-blue-500 text-white shadow-sm hover:scale-105 transition-transform duration-200">
           {skill}
-        </div>
+        </span>
       ))
     }
   </div>

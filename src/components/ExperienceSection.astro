@@ -1,0 +1,65 @@
+---
+import ExperienceCard from "./ExperienceCard.astro";
+
+const jobs = [
+  {
+    title: "Freelance Software developer",
+    location: "Remote",
+    date: "Jun 2024- Present",
+    achievements: [
+      "Developed and maintained web applications for multiple projects, ensuring scalability and performance at a New Jersey-based company called Scalibur Interactive.",
+      "Worked on a bookkeeping-style project where individuals and businesses uploaded their bank statements. Using AI technologies like LangChain and ChatGPT, we generated automated financial reports and insights from the uploaded documents.",
+    ],
+  },
+  {
+    title: "FrontEnd Developer",
+    company: "Action Black",
+    location: "Medellin, Colombia",
+    date: "Sept 2022 - March 2025",
+    achievements: [
+      "Led the development of an Automation System for Gym Rooms, using React.j, Next.js, Node and express.",
+      "Developed a Booking Application for client use, allowing seamless reservations and availability tracking with React Native.",
+      "Built a Multilingual Website for internationalization, ensuring accessibility and localization support with Next.js.",
+      "Created Internal Applications for Class and Schedule Management, optimizing teacher and course administration.",
+      "Integrated RESTful APIs to manage dynamic content and real-time updates",
+      "Optimized application performance and scalability, improving UI responsiveness and reducing load times",
+      "Collaborated with cross-functional teams to align development with business goals",
+      "Leveraged AWS services such as EC2, S3, and IAM for scalable and secure cloud infrastructure solutions.",
+    ],
+  },
+  {
+    title: "Web Developer",
+    company: "101 software",
+    location: "Medellin, Colombia",
+    date: "may. 2022 - sept. 2022",
+    achievements: [
+      `in charge of improving the performance, the accessibility of the pages and
+obtaining a good level of SEO,responsible for supporting and complying with
+the data changes that the client requires ,with technologies such as HTML,
+CSS, JavaScript and SharePoint, Angular`,
+    ],
+  },
+];
+---
+
+<section id="experience" class="max-w-screen-xl mx-auto py-12 px-4 mt-10">
+  <h2
+    class="text-4xl font-bold mb-10 text-white flex items-center gap-2 text-center"
+  >
+    <span>💼</span> Work Experience
+  </h2>
+
+  <div class="space-y-10">
+    {
+      jobs.map((job) => (
+        <ExperienceCard
+          title={job.title}
+          company={job.company}
+          location={job.location}
+          date={job.date}
+          achievements={job.achievements}
+        />
+      ))
+    }
+  </div>
+</section>
